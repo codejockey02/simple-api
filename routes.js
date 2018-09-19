@@ -69,7 +69,7 @@ module.exports = router => {
 
 		} else {
 
-			register.registerUser(name, email, password)
+			register.registerUser(name, email, password, token)
 
 			.then(result => {
 
