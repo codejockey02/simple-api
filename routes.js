@@ -60,7 +60,8 @@ module.exports = router => {
 
 		const name = req.body.name;
 		const email = req.body.email;
-		const password = req.body.password;
+        const password = req.body.password;
+        const token = req.body.token;
 
 		if (!name || !email || !password || !name.trim() || !email.trim() || !password.trim()) {
 

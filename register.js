@@ -3,7 +3,7 @@
 const user = require('./user');
 /* const bcrypt = require('bcryptjs'); */
 
-exports.registerUser = (name, email, password) =>
+exports.registerUser = (name, email, password, token) =>
     new Promise((resolve,reject) => {
         /* const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(password, salt); */
@@ -12,6 +12,7 @@ exports.registerUser = (name, email, password) =>
                 name: name,
                 email: email,
                 password: password,
+                token: token,
                 created_at: new Date()
             });
 
