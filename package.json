@@ -1,0 +1,35 @@
+{
+    "name": "login",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "dependencies": {
+      "basic-auth": "^1.0.4",
+      "bcryptjs": "^2.3.0",
+      "body-parser": "^1.15.2",
+      "express": "^4.14.0",
+      "jsonwebtoken": "^7.1.9",
+      "mongoose": "^4.6.0",
+      "morgan": "^1.7.0",
+      "nodemailer": "^2.6.0",
+      "randomstring": "^1.1.5",
+      "jsonminify": "^0.4.1",
+      "fs": "*"
+    },
+    "devDependencies": {},
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/codejockey02/node--login.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/codejockey02/node--login/issues"
+    },
+    "homepage": "https://github.com/codejockey02/node--login#readme"
+  }
+  
