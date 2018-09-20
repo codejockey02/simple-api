@@ -21,11 +21,20 @@ module.exports = router => {
             var veri = {password : "error"};
 			const credentials = req.body.email;
                 cred = await user.collection.findOne({email:credentials},{email: 1 , _id:0});
+
+                if(cred==null){
+                     cred = {email : "error"};
+                }
                 if (cred.email == credentials) {
                     const pwd = req.body.password;
                         
                      veri = await user.collection.findOne({email: credentials, password: pwd },{password:1 , _id:0});
-                        if(veri.password == pwd) {
+                        
+                     if(veri==null){
+                         veri = {password : "error"};
+                     }
+                     
+                     if(veri.password == pwd) {
                             res.status(201).json({message: 'User Authenticated !'});
                             var key = randomstring.generate();
                             user.collection.update(
@@ -37,12 +46,12 @@ module.exports = router => {
                                 }
                             );
                             } else {
-                                res.status(401).json({message: 'Nopsi'});
+                                res.status(401).json({message: 'Incorrect Password'});
                             }
                     
                 } else {
     
-                    res.status(400).json({ message: 'Invalid Request !' });	
+                    res.status(400).json({ message: 'User not Found !' });	
                 }
             
 			
