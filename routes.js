@@ -17,8 +17,8 @@ module.exports = router => {
 	router.post('/login', (req, res) => {
 		
 		async function checking(){
-            var cred = "error";
-            var veri = "orror";
+            var cred = {email : "error"};
+            var veri = {password : "error"};
 			const credentials = req.body.email;
                 cred = await user.collection.findOne({email:credentials},{email: 1 , _id:0});
                 if (cred.email == credentials) {
