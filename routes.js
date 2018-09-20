@@ -7,6 +7,7 @@ const jsonminify = require('jsonminify');
 const register = require('./register.js');
 const login = require('./login.js');
 const user = require('./user.js');
+var randomstring = require("randomstring");
 
  
 module.exports = router => {
@@ -17,24 +18,31 @@ module.exports = router => {
 		
 		async function checking(){
 			const credentials = req.body.email;
-            try{
                 const cred = await user.collection.findOne({email:credentials},{email: 1 , _id:0});
-                if (cred.email == null) {
-                    res.status(400).json({ message: 'Invalid Request !' });
+                if (cred.email == credentials) {
+                    const pwd = req.body.password;
+                        
+                    const veri = await user.collection.findOne({email: credentials, password: pwd },{password:1 , _id:0});
+                        if(veri.password == pwd) {
+                            res.status(201).json({message: 'User Authenticated !'});
+                            var key = randomstring.generate();
+                            user.collection.update(
+                                {email: credentials},
+                                {
+                                    $set: {
+                                        "token": key
+                                    }
+                                }
+                            );
+                            } else {
+                                res.status(401).json({message: 'Nopsi'});
+                            }
+                    
                 } else {
     
-                    const pwd = req.body.password;
-    
-                    const veri = await user.collection.findOne({email: credentials, password: pwd },{password:1 , _id:0});
-                        if(veri.password == null) {
-                            res.status(201).json({message: 'Password is incorrect'});
-                            } else {
-                                res.status(401).json({message: 'User Authenticated !'});
-                            }	
+                    res.status(400).json({ message: 'Invalid Request !' });	
                 }
-            } catch(err){
-                res.status(400).json({message: 'User Not Found ! Either the email or the password is incorrect.'});
-            }
+            
 			
 		
         }	
