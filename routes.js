@@ -35,7 +35,7 @@ module.exports = router => {
                      }
                      
                      if(veri.password == pwd) {
-                            res.status(201).json({message: 'User Authenticated !'});
+                            res.status(201).send('User Authenticated !');
                             var key = randomstring.generate();
                             user.collection.update(
                                 {email: credentials},
@@ -46,12 +46,12 @@ module.exports = router => {
                                 }
                             );
                             } else {
-                                res.status(401).json({message: 'Incorrect Password'});
+                                res.status(401).send('Incorrect Password');
                             }
                     
                 } else {
     
-                    res.status(400).json({ message: 'User not Found !' });	
+                    res.status(400).send('User not Found !');	
                 }
             
 			
